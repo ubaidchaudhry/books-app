@@ -1,0 +1,25 @@
+<div style="margin-block: 35px;">
+  <h2>Assign Tag To Books</h2> 
+</div>
+<form action="<%= assign_tag_to_books_path %>" method="post">
+  <input type="hidden" name="_method" value="put" />
+  <%= token_tag %> 
+
+  <select class="custom-select" name="tag_id" id="inputGroupSelect01" style="margin-block: 10px;"> 
+    <option selected>Choose Tag</option>
+    <% @tags.each do |tag| %>
+      <option value= <%= tag.id %> ><%= tag.name %></option>
+    <% end %>
+  </select>
+
+  <div style="width: 100%;">
+    <select class="custom-select" name="books_ids[]" id="selectpicker" style="width: 100%;" multiple >
+      <option selected disabled=true>Choose Books</option>
+      <% @books.each do |books| %>
+        <option value= <%= books.id %> ><%= books.title %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
+</form>

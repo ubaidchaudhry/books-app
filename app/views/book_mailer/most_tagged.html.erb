@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Most Tagged Emails</p>
+    --------------------------
+    </p>
+    <% @books.each do |book| %>
+      <p>Title: <%= book.title %></p>
+      <p>Description: <%= book.description %></p>
+      <p>Price: <%= book.price %></p>
+    <% end %>
+
+  </body>
+</html>
