@@ -3,9 +3,32 @@
     <h2>Books Details</h2> 
   </div>
   <div class="col">
-    <button type="button" class="btn" style="padding-inline: 20px;"><%= link_to 'Assigning Tags To Books', assign_tag_books_path %></button>
+    <%= link_to 'Assigning Tags To Books', assign_tag_books_path, class: "btn btn-light", style: "padding-inline: 20px;" %>
   </div>
 </div>
+
+<form action="/books" method="GET" class="row">
+  <div class="col-3">
+    <input type="decimal" name="search_price" class="form-control" placeholder="Search Price" value=<%=params["search_price"]%> >
+  </div>
+  <div class="col-3">
+    <select class="custom-select" name="tag_id" id="inputGroupSelect01"> 
+      <option value="0" disabled <%=params["tag_id"].present? ? '' 
+        : 'selected' %>>Choose Tag</option>
+      <% @tags.each do |tag| %>
+        <option value= <%= tag.id %> <%= tag.id == params["tag_id"].to_i ? 'selected' 
+        : '' %>><%= tag.name %></option>
+      <% end %>
+    </select>
+  </div>
+  <div class="col-3">
+    <button type="submit" class="btn btn-primary" >Search</button>
+    <%= link_to 'Reset', books_path, class: 'btn btn-light' %>
+  </div>
+</form>
+<br>
+  
+
 <table class="table">
   <thead>
     <tr>
@@ -14,6 +37,7 @@
       <th scope="col">Description</th>
       <th scope="col">Price</th>
       <th scope="col">Tags</th>
+      <th scope="col">Destroy</th>
     </tr>
   </thead>
 
@@ -28,6 +52,9 @@
           <% book.tags.each do |tag| %>
             <div class="btn btn-primary" style="margin-bottom: 5px;"><%= tag.name %></div>
           <% end %>
+        </td>
+        <td>
+          <div style="margin-bottom: 5px;"><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></div>
         </td>
       </tr>
     <% end %>
